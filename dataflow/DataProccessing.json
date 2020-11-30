@@ -14,13 +14,9 @@
 			],
 			"sinks": [
 				{
-					"linkedService": {
-						"referenceName": "AzureDataLakeStorageOutG",
-						"type": "LinkedServiceReference"
-					},
-					"schemaLinkedService": {
-						"referenceName": "AzureDataLakeStorageOutG",
-						"type": "LinkedServiceReference"
+					"dataset": {
+						"referenceName": "SinkCSVTam",
+						"type": "DatasetReference"
 					},
 					"name": "sink1"
 				}
@@ -37,12 +33,9 @@
 				},
 				{
 					"name": "Select2"
-				},
-				{
-					"name": "AlterRow1"
 				}
 			],
-			"script": "source(output(\n\t\tYear as string,\n\t\tMonth as string,\n\t\tCountry as string,\n\t\tCalorie_category as string,\n\t\tFlavor as string,\n\t\tZone as string,\n\t\tProduct_code as string,\n\t\tProduct_name as string,\n\t\tSales as float '###.##'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> source1\nsource1 select(mapColumn(\n\t\tYear,\n\t\tMonth,\n\t\tCountry,\n\t\tCalorie_category,\n\t\tFlavor,\n\t\tZone,\n\t\tProduct_code,\n\t\tProduct_name,\n\t\tSales\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(Year = year(toDate(Year)),\n\t\tID = partitionId()) ~> DerivedColumn1\nDerivedColumn1 sort(asc(Year, true),\n\tpartitionLevel: true) ~> Sort1\nSort1 select(mapColumn(\n\t\tID,\n\t\tYEAR = Year,\n\t\tMonth,\n\t\tCountry,\n\t\tCalorie_category,\n\t\tFlavor,\n\t\tZone,\n\t\tProduct_code,\n\t\tProduct_name,\n\t\tSales\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select2\nSelect2 alterRow() ~> AlterRow1\nAlterRow1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: 'blobcontainer',\n\ttruncate: false,\n\tmergeSchema: false,\n\tvacuum: 0,\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:false,\n\tkeys:['ID'],\n\tfilePattern:'SinkFileDatasetTam',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+			"script": "source(output(\n\t\tYear as string,\n\t\tMonth as string,\n\t\tCountry as string,\n\t\tCalorie_category as string,\n\t\tFlavor as string,\n\t\tZone as string,\n\t\tProduct_code as string,\n\t\tProduct_name as string,\n\t\tSales as float '###.##'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> source1\nsource1 select(mapColumn(\n\t\tYear,\n\t\tMonth,\n\t\tCountry,\n\t\tCalorie_category,\n\t\tFlavor,\n\t\tZone,\n\t\tProduct_code,\n\t\tProduct_name,\n\t\tSales\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(Year = year(toDate(Year)),\n\t\tID = partitionId()) ~> DerivedColumn1\nDerivedColumn1 sort(asc(Year, true),\n\tpartitionLevel: true) ~> Sort1\nSort1 select(mapColumn(\n\t\tID,\n\t\tYEAR = Year,\n\t\tMonth,\n\t\tCountry,\n\t\tCalorie_category,\n\t\tFlavor,\n\t\tZone,\n\t\tProduct_code,\n\t\tProduct_name,\n\t\tSales\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select2\nSelect2 sink(input(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string,\n\t\tColumn_7 as string,\n\t\tColumn_8 as string,\n\t\tColumn_9 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 		}
 	}
 }
