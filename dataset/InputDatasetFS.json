@@ -10,8 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureFileStorageLocation",
-				"fileName": "ventas_mensuales_Centro.csv",
-				"folderPath": "optcontainer/crudo/generador/fuente/20200801/Centro"
+				"folderPath": "optcontainer/crudo/generador/fuente/20200801"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

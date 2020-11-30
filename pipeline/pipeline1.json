@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "CopiedPipeline",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -19,7 +19,9 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureFileStorageReadSettings",
-							"recursive": true
+							"recursive": true,
+							"wildcardFolderPath": "optcontainer/crudo/generador/fuente/20200801/*",
+							"wildcardFileName": "*.csv"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -59,6 +61,30 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "dataflow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DataProccessing",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"annotations": []
