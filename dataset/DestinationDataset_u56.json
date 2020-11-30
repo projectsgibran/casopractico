@@ -2,15 +2,15 @@
 	"name": "DestinationDataset_u56",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorageG2",
+			"referenceName": "DestinationLinkedService",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "blobcontainer"
+				"type": "AzureBlobStorageLocation",
+				"container": "blobcontainer"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

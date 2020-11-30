@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "FtpServerLocation",
-				"folderPath": "crudo/generador/fuente/20200801"
+				"fileName": "ventas_mensuales_Centro.csv",
+				"folderPath": "crudo/generador/fuente/20200801/Centro"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
