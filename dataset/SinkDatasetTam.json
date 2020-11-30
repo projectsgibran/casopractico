@@ -2,15 +2,15 @@
 	"name": "SinkDatasetTam",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorageOutG",
+			"referenceName": "AzureBlobStorageSink",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "blobcontainer"
+				"type": "AzureBlobStorageLocation",
+				"container": "blobcontainer"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
