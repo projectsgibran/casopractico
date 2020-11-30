@@ -19,9 +19,12 @@
 				},
 				{
 					"name": "DerivedColumn1"
+				},
+				{
+					"name": "Aggregate1"
 				}
 			],
-			"script": "source(output(\n\t\tYear as string,\n\t\tMonth as string,\n\t\tCountry as string,\n\t\tCalorie_category as string,\n\t\tFlavor as string,\n\t\tZone as string,\n\t\tProduct_code as string,\n\t\tProduct_name as string,\n\t\tSales as float '###.##'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> source1\nsource1 select(mapColumn(\n\t\tYear,\n\t\tMonth,\n\t\tCountry,\n\t\tCalorie_category,\n\t\tFlavor,\n\t\tZone,\n\t\tProduct_code,\n\t\tProduct_name,\n\t\tSales\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(Year = year(toDate(Year))) ~> DerivedColumn1"
+			"script": "source(output(\n\t\tYear as string,\n\t\tMonth as string,\n\t\tCountry as string,\n\t\tCalorie_category as string,\n\t\tFlavor as string,\n\t\tZone as string,\n\t\tProduct_code as string,\n\t\tProduct_name as string,\n\t\tSales as float '###.##'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> source1\nsource1 select(mapColumn(\n\t\tYear,\n\t\tMonth,\n\t\tCountry,\n\t\tCalorie_category,\n\t\tFlavor,\n\t\tZone,\n\t\tProduct_code,\n\t\tProduct_name,\n\t\tSales\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(Year = year(toDate(Year))) ~> DerivedColumn1\nDerivedColumn1 aggregate() ~> Aggregate1"
 		}
 	}
 }
