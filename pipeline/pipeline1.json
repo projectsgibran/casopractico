@@ -1,9 +1,9 @@
 {
-	"name": "CopyPipelineProject",
+	"name": "pipeline1",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copied_Data",
+				"name": "Copy data1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -13,54 +13,51 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [
-					{
-						"name": "Source",
-						"value": "crudo/generador/fuente/20200801/"
-					},
-					{
-						"name": "Destination",
-						"value": "blobcontainer//"
-					}
-				],
+				"userProperties": [],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "FtpReadSettings",
+							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFolderPath": "**",
-							"wildcardFileName": "*",
-							"useBinaryTransfer": true
+							"wildcardFolderPath": "crudo/generador/fuente/20200801/**",
+							"wildcardFileName": "*.csv"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings",
-							"skipLineCount": 0
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "PreserveHierarchy"
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"fileExtension": ".csv"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_u56",
+						"referenceName": "GithubInputDataset",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_u56",
+						"referenceName": "OutputDatasetG",
 						"type": "DatasetReference"
 					}
 				]

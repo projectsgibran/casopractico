@@ -1,0 +1,21 @@
+{
+	"name": "GithubInputDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageG",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "blobcontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
