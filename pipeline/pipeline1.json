@@ -18,10 +18,8 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"wildcardFolderPath": "crudo/generador/fuente/20200801/**",
-							"wildcardFileName": "*.csv"
+							"type": "AzureFileStorageReadSettings",
+							"recursive": true
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -51,7 +49,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "GithubInputDataset",
+						"referenceName": "InputDatasetFS",
 						"type": "DatasetReference"
 					}
 				],

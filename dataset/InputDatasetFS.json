@@ -1,16 +1,17 @@
 {
-	"name": "OutputDatasetG",
+	"name": "InputDatasetFS",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorageOutG",
+			"referenceName": "AzureFileStorageG",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "blobcontainer"
+				"type": "AzureFileStorageLocation",
+				"fileName": "ventas_mensuales_Centro.csv",
+				"folderPath": "optcontainer/crudo/generador/fuente/20200801/Centro"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
