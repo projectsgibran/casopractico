@@ -14,7 +14,7 @@
 			],
 			"sinks": [],
 			"transformations": [],
-			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> source1"
+			"script": "source(output(\n\t\tYear as date 'yyyy',\n\t\tMonth as string,\n\t\tCountry as string,\n\t\tCalorie_category as string,\n\t\tFlavor as string,\n\t\tZone as string,\n\t\tProduct_code as string,\n\t\tProduct_name as string,\n\t\tSales as float '###.##'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true) ~> source1"
 		}
 	}
 }
