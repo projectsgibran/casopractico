@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_u56",
+				"name": "Copied_Data",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
